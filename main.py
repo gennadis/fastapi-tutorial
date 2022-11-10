@@ -19,15 +19,8 @@ async def root():
 
 
 @api.get("/items/{item_id}")
-async def read_item(item_id: int, q: str | None = None, short: bool = False):
-    item = {"Item_id": item_id}
-    if q:
-        item.update({"q": q})
-    if not short:
-        item.update(
-            {"description": "This is an amazing item that has a long description"}
-        )
-    return item
+async def read_item(item_id: int, needy: str, skip: int, limit: int | None = None):
+    return {"item_id": item_id, "needy": needy, "skip": skip, "limit": limit}
 
 
 @api.get("/users/me")
