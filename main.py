@@ -38,7 +38,7 @@ async def read_file(file_path: str):
 
 
 @api.get("/items/")
-async def read_items(q: str = Query(min_length=2, max_length=8)):
+async def read_items(q: list[str] | None = Query(default=...)):
     results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
     if q:
         results.update({"q": q})
