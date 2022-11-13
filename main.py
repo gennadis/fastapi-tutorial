@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 
 api = FastAPI()
 
@@ -38,7 +38,7 @@ async def read_file(file_path: str):
 
 
 @api.get("/items/")
-async def read_items(q: str | None = None):
+async def read_items(q: str | None = Query(default=None, max_length=8)):
     results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
     if q:
         results.update({"q": q})
