@@ -37,6 +37,9 @@ async def read_file(file_path: str):
     return {"file_path": file_path}
 
 
-@api.put("/items/{item_id}")
-async def create_item(item_id: int, item: Item):
-    return {"item_id": item_id, **item.dict()}
+@api.get("/items/")
+async def read_items(q: str | None = None):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results
