@@ -38,7 +38,15 @@ async def read_file(file_path: str):
 
 
 @api.get("/items/")
-async def read_items(q: list[str] | None = Query(default=...)):
+async def read_items(
+    q: list[int]
+    | None = Query(
+        default=[1, 3, 1999],
+        title="List of integers",
+        description="List of integers",
+        deprecated=True,
+    )
+):
     results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
     if q:
         results.update({"q": q})
